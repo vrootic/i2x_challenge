@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}User: {{ object.username }}{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <div class="row">
+    <div class="col-sm-12">
+
+      <h2>Username: {{ object.username }}</h2>
+      <h2>Email: {{ object.email }}</h2>
+      <h2>Team: {{ object.team_name }}</h2>
+      {% if object.name %}
+        <p>{{ object.name }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+{% if object == request.user %}
+<!-- Action buttons -->
+<div class="row">
+
+  <div class="col-sm-12">
+    <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">Update my info</a>
+    <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a>
+    <!-- Your Stuff: Custom user template urls -->
+  </div>
+
+</div>
+<!-- End Action buttons -->
+{% endif %}
+{% block javascript %}{% endblock javascript%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script type="text/javascript">
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    },
+});
+
+$.ajax({
+    url: "{% url 'users:assign_team' %}",
+    type: "POST",
+    data: {
+      csrfmiddlewaretoken: csrftoken,
+    },
+    dataType: "json",
+    success: function(data){
+
+    }
+});
+
+</script>
+
+</div>
+{% endblock content %}
+
