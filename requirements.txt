@@ -65,3 +65,4 @@ django-anymail==0.8
 raven==6.0.0
 
 # Your custom requirements go here
+django-debug-toolbar==1.7
