@@ -120,6 +120,11 @@ SERVER_EMAIL = env('DJANGO_SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
 #     'MAILGUN_SENDER_DOMAIN': env('MAILGUN_SENDER_DOMAIN')
 # }
 # EMAIL_BACKEND = 'anymail.backends.mailgun.MailgunBackend'
+EMAIL_PORT = 1025
+
+EMAIL_HOST = 'localhost'
+EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND',
+                    default='django.core.mail.backends.console.EmailBackend')
 
 # TEMPLATE CONFIGURATION
 # ------------------------------------------------------------------------------
