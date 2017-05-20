@@ -1,11 +1,10 @@
 
 # PostgreSQL
-DATABASE_URL=
 POSTGRES_PASSWORD=mysecretpass
 POSTGRES_USER=postgresuser
 
 # General settings
-#DJANGO_READ_DOT_ENV_FILE=True
+DJANGO_READ_DOT_ENV_FILE=True
 DJANGO_ADMIN_URL='/admin'
 DJANGO_SETTINGS_MODULE=config.settings.production
 DJANGO_SECRET_KEY=<4Dk#5,pp+qW-du{ApdZ)TV/RmbGNq[Z*%H+xNdG&Fc(-zDgpK
