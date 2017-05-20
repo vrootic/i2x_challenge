@@ -63,6 +63,7 @@ $.ajaxSetup({
         }
     },
 });
+alert("hello world");
 console.log(csrftoken);
 $.ajax({
     url: "{% url 'users:assign_team' %}",
