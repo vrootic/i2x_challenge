@@ -53,6 +53,9 @@
                   <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{{request.user.username}}{% trans "'s Profile" %}</a>
                 </li>
                 <li class="nav-item">
+                  <a class="nav-link" href="{% url 'account_change_password' %}">{% trans "Change Password" %}</a>
+                </li>
+                <li class="nav-item">
                   <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a>
                 </li>
               {% else %}
