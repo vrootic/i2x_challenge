@@ -31,4 +31,10 @@ urlpatterns = [
         view=views.assign_team,
         name='assign_team'
     ),
+    url(
+        regex=r'^~send-invitation/$',
+        view=views.InvitationView.as_view(),
+        name='send-invitation'
+    ),
+
 ]

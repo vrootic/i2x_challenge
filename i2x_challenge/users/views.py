@@ -10,6 +10,7 @@ from django.views.generic.edit import FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import User
+from .forms import InvitationForm
 from ..invitations.models import Invitation
 
 
@@ -64,3 +65,22 @@ def assign_team(request):
                 print("invitation not exist")
 
         return JsonResponse({"response": "successful"})
+
+class InvitationView(FormView):
+    template_name = 'users/invitation.html'
+    form_class = InvitationForm
+    
+    def get_form_kwargs(self):
+        kwargs = super(InvitationView, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        form.send_email()
+        return super(InvitationView, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('users:detail',
+                       kwargs={'username': self.request.user.username})
