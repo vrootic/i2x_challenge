@@ -63,13 +63,13 @@ $.ajaxSetup({
         }
     },
 });
-alert(csrftoken);
+
 
 $.ajax({
     url: "{% url 'users:assign_team' %}",
     type: "POST",
     data: {
-      csrfmiddlewaretoken: csrftoken,
+      csrfmiddlewaretoken: {{ csrf_token }},
     },
     dataType: "json",
     success: function(data){
